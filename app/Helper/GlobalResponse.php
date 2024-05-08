@@ -8,7 +8,6 @@ class GlobalResponse
 {
     public $data;
     public $message;
-
     public $status_code;
 
     public function __construct($data, $message, $status_code)
@@ -17,6 +16,7 @@ class GlobalResponse
         $this->message = $message;
         $this->status_code = $status_code;
     }
+
     public static function success($data, $message, $status_code) : JsonResponse
     {
         $response = new static($data, $message, $status_code);

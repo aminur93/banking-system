@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Throwable;
 
-class Register{
+class RegisterService{
 
     public function register(Request $request)
     {

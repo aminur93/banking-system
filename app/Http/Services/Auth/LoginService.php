@@ -11,11 +11,11 @@ use Illuminate\Support\Facades\Hash;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
-class Login{
+class LoginService{
 
     public function login(Request $request)
     {
-         $loginField = request()->input('email');
+        $loginField = request()->input('email');
 
         $credentials = null;
 
@@ -65,13 +65,14 @@ class Login{
 
     public function responseWithToken($token)
     {
-
         $data = [
             "user" => Auth::user(),
             'access_token' => $token,
             'token_type' => 'bearer',
             'expires_in' => $this->guard()->factory()->getTTL() * 60
         ];
+
+        return $data;
     }
 
     /**

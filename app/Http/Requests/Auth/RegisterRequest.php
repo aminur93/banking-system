@@ -11,7 +11,7 @@ class RegisterRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,19 @@ class RegisterRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|string|min:6|max:18|confirmed|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{6,18}$/',
+            'password_confirmation' => 'required_with:password|same:password',
+            'account_type' => 'required|string',
+            'balance' => 'required|not_in:0'
+        ];
+    }
+
+     public function messages()
+    {
+        return [
+            'password.regex' => 'The password must contain at least one uppercase letter, one lowercase letter, one digit, one special character, and be between 6 and 18 characters long.',
         ];
     }
 }
